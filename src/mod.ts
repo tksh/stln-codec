@@ -7,3 +7,6 @@
  */
 export * from "./types.ts";
 export * from "./base-n/mod.ts";
+export * from "./color/mod.ts";
+export * from "./group-colors/mod.ts";
+export * from "./widths-counts/mod.ts";

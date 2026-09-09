@@ -80,10 +80,18 @@ export interface DecodedGroup {
   absDvalsObj: Dvals;
 }
 
-/** Decoded per-group color attributes. */
+/** Decoded per-group color attributes (full fidelity, as encoded). */
 export interface DecodedGroupColors {
+  gStrokeHex: string;
+  gStrokeRgbArr: [number, number, number];
   gStrokeRgbStr: string;
+  gOpacityUint8: number;
+  gOpacityFloat: number;
+  /** `"1.0"`/`"0.0"` for 1/0, else the plain decimal string. */
   gOpacity: string;
+  gStrokeOpacityUint8: number;
+  gStrokeOpacityFloat: number;
+  /** `"1.0"`/`"0.0"` for 1/0, else the plain decimal string. */
   gStrokeOpacity: string;
 }
 
@@ -107,4 +115,35 @@ export interface DecodedParams {
   basicData: BasicData;
   linesData: Map<number, DecodedGroup>;
   sizeData: SizeData;
+}
+
+/** Four coordinate rows, used for aggregated diff/frequency tables. */
+export interface CoordRows {
+  x1: number[];
+  y1: number[];
+  x2: number[];
+  y2: number[];
+}
+
+/** Aggregated per-mode data feeding the d-value encoders. */
+export interface AggModeData {
+  diff_by_row: CoordRows;
+  frequent_diff_values_sorted: CoordRows;
+  frequent_diff_counts_sorted: CoordRows;
+}
+
+/**
+ * Lines data aggregated for encoding (one entry per line group): stroke-width
+ * runs plus absolute/relative diff tables.
+ */
+export interface AggregatedLinesData {
+  g_id: number;
+  stroke_width: {
+    widths: number[];
+    counts: number[];
+  };
+  d: {
+    absolute: AggModeData;
+    relative: AggModeData;
+  };
 }
