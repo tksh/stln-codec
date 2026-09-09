@@ -204,6 +204,33 @@ Deno.test("bruteforce53 round-trips diff tables with a dictionary", () => {
   ]);
 });
 
+Deno.test("bruteforce53 caps the dictionary at 52 - baseX", () => {
+  const rows: CoordRows = {
+    x1: [7, -1, 10],
+    y1: [0, 5, -1],
+    x2: [3, 3, 4],
+    y2: [1, 2, 3],
+  };
+  // baseX 52 ↔ cap 0: the 3-entry list is dropped on both sides, so the
+  // payload stays decodable (previously the encoder kept all 3 entries while
+  // the decoder built an empty codebook).
+  const freq: CoordRows = {
+    x1: [-1, -3, -5],
+    y1: [-1, -2, -3],
+    x2: [-1],
+    y2: [],
+  };
+  const payload = encodeBruteforce53Diffs([aggDiffs(0, rows, freq)], 5, 52).get(
+    0,
+  ) as string;
+  assertEquals(bruteforce53Dec(payload, 5), [
+    rows.x1,
+    rows.y1,
+    rows.x2,
+    rows.y2,
+  ]);
+});
+
 Deno.test("decodeDiff rejects undecodable input", () => {
   assertThrows(() => decodeDiff("!!", new Map(), 52), Error);
   assertThrows(() => bruteforce53Dec("", 5), Error);

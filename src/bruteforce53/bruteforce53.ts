@@ -4,11 +4,10 @@
  *
  * Payload layout: `[base53(baseX)]-[x1freq]-[x1diff]-…-[y2freq]-[y2diff]`.
  *
- * NOTE (faithful port): `encodeBruteforce53Diffs` passes `baseXNumber` where
- * `getActualCodebookSize` expects a max-codebook size, exactly as pfpg's
- * `bruteforce53-enc.js` does. Whether that is intended upstream is an open
- * question for the human (see report); decode derives the size as
- * `52 − baseX` per `bruteforce53-dec.js`.
+ * The dictionary size is capped at the max-codebook size (`52 − baseX`),
+ * matching what the decoder derives from the payload's first char. (An
+ * earlier revision passed `baseXNumber` here, producing payloads the decoder
+ * could not reconstruct whenever the list was longer than the cap.)
  */
 import { base53Dec, base53Enc } from "../base-n/base53.ts";
 import type { AggregatedLinesData } from "../types.ts";
@@ -51,7 +50,7 @@ export function encodeBruteforce53Diffs(
     const perCoord = COORDS.map((coord: Coord) => {
       const diffArr = agg.d.relative.diff_by_row[coord];
       const freqArr = agg.d.relative.frequent_diff_values_sorted[coord];
-      const actualSize = getActualCodebookSize(baseXNumber, freqArr);
+      const actualSize = getActualCodebookSize(52 - baseXNumber, freqArr);
       const codebook = createCodebookToEnc(freqArr.slice(0, actualSize));
       const freqEncoded = encodeFreqDiff(freqArr.slice(0, actualSize), uintN);
       const diffEncoded = diffArr
