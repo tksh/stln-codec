@@ -10,3 +10,7 @@ export * from "./base-n/mod.ts";
 export * from "./color/mod.ts";
 export * from "./group-colors/mod.ts";
 export * from "./widths-counts/mod.ts";
+export * from "./bruteforce53/mod.ts";
+export * from "./bigint64/mod.ts";
+export * from "./swap63/mod.ts";
+export * from "./four16/mod.ts";

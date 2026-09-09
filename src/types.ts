@@ -125,6 +125,9 @@ export interface CoordRows {
   y2: number[];
 }
 
+/** Decoded coordinate quad in `[x1, y1, x2, y2]` order. */
+export type DvalQuad = [number[], number[], number[], number[]];
+
 /** Aggregated per-mode data feeding the d-value encoders. */
 export interface AggModeData {
   diff_by_row: CoordRows;
