@@ -34,6 +34,24 @@ Deno.test("parseBasicData validates the JSON shape", () => {
   assertThrows(() => parseBasicData({ bits: 5 }), Error);
 });
 
+Deno.test("encodeBasicData rejects unsafe verbatim values", () => {
+  assertThrows(
+    () => encodeBasicData({ bits: "~5", title: "~bad value with spaces" }),
+    Error,
+    "not URI-safe",
+  );
+  assertThrows(
+    () => encodeBasicData({ bits: "~5", title: "~日本語" }),
+    Error,
+    "not URI-safe",
+  );
+  // Safe verbatim values still pass through untouched.
+  assertStrictEquals(
+    encodeBasicData({ bits: "~5", title: "~202407_001" }),
+    "?bits=~5&title=~202407_001&",
+  );
+});
+
 Deno.test("encodeBasicData emits the canonical fragment", () => {
   // URI-safe values pass through verbatim, joined in key order.
   assertStrictEquals(
@@ -96,6 +114,25 @@ Deno.test("basic data round-trips through URL params", async () => {
   await assertRejects(
     () => getBasicDataFromUrlParams(new URLSearchParams("title=x")),
     Error,
+  );
+});
+
+Deno.test("decode rejects present-but-empty values", async () => {
+  // A single invalid item fails the whole decode — no partial SVG.
+  await assertRejects(
+    () => getBasicDataFromUrlParams(new URLSearchParams("bits=~5&title=")),
+    Error,
+  );
+  await assertRejects(
+    () => getBasicDataFromUrlParams(new URLSearchParams("bits=&title=~x")),
+    Error,
+  );
+  // Absent optional keys stay omitted; missing bits still required.
+  assertEquals(
+    await getBasicDataFromUrlParams(new URLSearchParams("bits=~5")),
+    {
+      bits: "5",
+    },
   );
 });
 

@@ -44,7 +44,15 @@ export function parseBasicData(json: unknown): BasicData {
   return result;
 }
 
-/** Encode basic data to its `?k=v&…` URL-param fragment. */
+/**
+ * Encode basic data to its `?k=v&…` URL-param fragment.
+ *
+ * Value contract: a `~`-prefixed value claims to be already URI-safe and
+ * passes through verbatim (the decoder strips exactly one `~`). A
+ * `~`-prefixed value containing non-URI-safe characters is rejected — it
+ * could never decode back — as is any attempt to encode it. Other unsafe
+ * values take the `~`-prefixed compressor path.
+ */
 export function encodeBasicData(
   data: BasicData,
   opts: { include?: readonly BasicDataKey[] } = {},
@@ -54,6 +62,13 @@ export function encodeBasicData(
   for (const key of include) {
     const value = data[key];
     if (value === undefined || value === "") continue;
+    if (value.startsWith("~") && !URI_SAFE.test(value)) {
+      throw new Error(
+        `encodeBasicData: ${key} claims verbatim (~) form but is not URI-safe: ${
+          JSON.stringify(value)
+        }`,
+      );
+    }
     params += URI_SAFE.test(value)
       ? `${key}=${value}&`
       : `${key}=~${urlCompressorEncode(value)}&`;
@@ -61,7 +76,13 @@ export function encodeBasicData(
   return params;
 }
 
-/** Decode basic-data values out of URL params (decompressing each). */
+/**
+ * Decode basic-data values out of URL params (decompressing each).
+ *
+ * Strict: a present-but-empty value is invalid data and throws — callers must
+ * not silently render artwork with a missing title, empty bits, and the like.
+ * Absent optional keys are simply omitted (`bits` is still required).
+ */
 export async function getBasicDataFromUrlParams(
   params: URLSearchParams,
 ): Promise<BasicData> {
@@ -70,7 +91,10 @@ export async function getBasicDataFromUrlParams(
   for (const key of BASIC_DATA_KEYS) {
     if (!params.has(key)) continue;
     const raw = params.get(key);
-    if (raw === null || raw === "") continue;
+    if (raw === null) continue;
+    if (raw === "") {
+      throw new Error(`getBasicDataFromUrlParams: empty value for ${key}`);
+    }
     const value = await tryDecompress(raw);
     if (key === "bits") {
       result.bits = value;
