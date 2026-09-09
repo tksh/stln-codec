@@ -6,3 +6,4 @@
  * `mergeUrlParams`, async `decodeUrlParams`, and `generateSvg`.
  */
 export * from "./types.ts";
+export * from "./base-n/mod.ts";
