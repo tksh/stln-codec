@@ -21,3 +21,4 @@ export * from "./four16/mod.ts";
 export * from "./size-data/mod.ts";
 export * from "./svg/mod.ts";
 export * from "./encode/mod.ts";
+export * from "./decode.ts";

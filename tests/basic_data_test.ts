@@ -99,9 +99,11 @@ Deno.test("basic data round-trips through URL params", async () => {
   );
 });
 
-Deno.test("resolveUintN reads flagged bits", async () => {
-  assertStrictEquals(await resolveUintN("~5"), 5);
-  await assertRejects(() => resolveUintN("~"), Error);
+Deno.test("resolveUintN reads decoded bits", () => {
+  assertStrictEquals(resolveUintN("5"), 5);
+  assertThrows(() => resolveUintN(""), Error);
+  assertThrows(() => resolveUintN("x"), Error);
+  assertThrows(() => resolveUintN("5.5"), Error);
 });
 
 Deno.test("tryDecompress covers all three flag branches", async () => {

@@ -89,11 +89,16 @@ export async function getBasicDataFromUrlParams(
   return result;
 }
 
-/** Resolve the UIntN grid size from flagged `bits` (e.g. `"~5"` → `5`). */
-export async function resolveUintN(bits: string): Promise<number> {
-  const plain = await tryDecompress(bits);
-  if (plain === "") throw new Error(`resolveUintN: empty bits`);
-  const uintN = Number(plain);
+/**
+ * Resolve the UIntN grid size from decoded `bits` (e.g. `"5"` → `5`).
+ *
+ * Takes the value *after* `tryDecompress`, mirroring pfpg (which decompresses
+ * exactly once in basic-data decoding, then coerces). Callers holding flagged
+ * input decompress first.
+ */
+export function resolveUintN(bits: string): number {
+  if (bits === "") throw new Error("resolveUintN: empty bits");
+  const uintN = Number(bits);
   if (!Number.isInteger(uintN) || uintN < 0) {
     throw new Error(`resolveUintN: invalid bits ${JSON.stringify(bits)}`);
   }
