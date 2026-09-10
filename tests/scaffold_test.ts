@@ -1,5 +1,5 @@
 import { assertEquals } from "@std/assert";
-import type { BasicData, PathMode } from "../src/mod.ts";
+import type { BasicData, PathMode } from "stln-codec";
 
 // Phase 1 scaffold test: data-model placeholder. Phase 2 replaces this with
 // unit, round-trip, and golden conformance tests (plan Phase 2–3).

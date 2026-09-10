@@ -5,8 +5,8 @@ import {
   get63Characters,
   get63Numbers,
   swap63Dec,
-} from "../src/swap63/mod.ts";
-import type { DvalQuad, LineGroup } from "../src/types.ts";
+} from "swap63/mod";
+import type { DvalQuad, LineGroup } from "types";
 
 Deno.test("swap63 codebook spans -31..31 over 63 characters", () => {
   assertStrictEquals(get63Numbers().length, 63);

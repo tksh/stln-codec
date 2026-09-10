@@ -5,20 +5,20 @@
  * `encodeBasicData`, per-method lines-data encoders, `bestMixEncode`,
  * `mergeUrlParams`, async `decodeUrlParams`, and `generateSvg`.
  */
-export * from "./types.ts";
-export * from "./constants.ts";
-export * from "./compression.ts";
-export * from "./flags.ts";
-export * from "./base-n/mod.ts";
-export * from "./color/mod.ts";
-export * from "./basic-data/mod.ts";
-export * from "./group-colors/mod.ts";
-export * from "./widths-counts/mod.ts";
-export * from "./bruteforce53/mod.ts";
-export * from "./bigint64/mod.ts";
-export * from "./swap63/mod.ts";
-export * from "./four16/mod.ts";
-export * from "./size-data/mod.ts";
-export * from "./svg/mod.ts";
-export * from "./encode/mod.ts";
-export * from "./decode.ts";
+export * from "types";
+export * from "stln-constants";
+export * from "compression";
+export * from "flags";
+export * from "base-n/mod";
+export * from "color/mod";
+export * from "basic-data/mod";
+export * from "group-colors/mod";
+export * from "widths-counts/mod";
+export * from "bruteforce53/mod";
+export * from "bigint64/mod";
+export * from "swap63/mod";
+export * from "four16/mod";
+export * from "size-data/mod";
+export * from "svg/mod";
+export * from "encode/mod";
+export * from "decode";

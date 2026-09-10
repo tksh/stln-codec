@@ -5,8 +5,8 @@
  * Encode takes aggregated lines data (not a textarea id).
  */
 import { runningReduce } from "@std/collections/running-reduce";
-import { base53Dec, base53Enc } from "../base-n/base53.ts";
-import type { AggregatedLinesData, DecodedWidthsAndCounts } from "../types.ts";
+import { base53Dec, base53Enc } from "base-n/base53";
+import type { AggregatedLinesData, DecodedWidthsAndCounts } from "types";
 
 /** Encode each group's stroke-width runs, by group id. */
 export function encodeWidthsAndCounts(

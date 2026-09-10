@@ -4,13 +4,9 @@ import {
   assertStrictEquals,
   assertThrows,
 } from "@std/assert";
-import { decodeGroupColors } from "../src/group-colors/mod.ts";
-import { hexExpandToTen } from "../src/color/mod.ts";
-import type {
-  AggregatedLinesData,
-  CoordRows,
-  LineGroup,
-} from "../src/types.ts";
+import { decodeGroupColors } from "group-colors/mod";
+import { hexExpandToTen } from "color/mod";
+import type { AggregatedLinesData, CoordRows, LineGroup } from "types";
 import {
   bestMixEncode,
   defaultMethodsForUintN,
@@ -22,12 +18,12 @@ import {
   parseAggregatedLinesData,
   parseLinesData,
   tryCompressDvals,
-} from "../src/encode/mod.ts";
+} from "encode/mod";
 import {
   decodeWidthsAndCounts,
   encodeWidthsAndCounts,
-} from "../src/widths-counts/mod.ts";
-import { encodeGroupColors } from "../src/group-colors/mod.ts";
+} from "widths-counts/mod";
+import { encodeGroupColors } from "group-colors/mod";
 
 const ROWS: CoordRows = { x1: [5], y1: [7], x2: [3], y2: [9] };
 

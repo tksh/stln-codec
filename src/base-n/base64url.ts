@@ -3,7 +3,7 @@
  *
  * Used by the bigint64 d-value codec for arbitrarily large integers.
  */
-import { getBase64UrlCharacters } from "./chars.ts";
+import { getBase64UrlCharacters } from "base-n/chars";
 
 const ALPHABET64URL = getBase64UrlCharacters();
 

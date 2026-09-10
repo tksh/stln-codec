@@ -4,8 +4,8 @@
  * Values are pre-shifted non-negative (see `shift.ts`) and padded to two
  * digits with `a`.
  */
-import { getAlphabets52, getAlphabetsForBaseX } from "./alphabets.ts";
-import { addNumBeforeEncode, subtractNumAfterDecode } from "./shift.ts";
+import { getAlphabets52, getAlphabetsForBaseX } from "bruteforce53/alphabets";
+import { addNumBeforeEncode, subtractNumAfterDecode } from "bruteforce53/shift";
 
 /** Encode a diff as two base-X letters; throws when out of range. */
 export function baseXEnc(numOriginal: number, baseX: number): string {

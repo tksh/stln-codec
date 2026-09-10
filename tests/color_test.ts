@@ -14,7 +14,7 @@ import {
   tryAddHash,
   tryDeleteHash,
   uint8ToHex,
-} from "../src/color/mod.ts";
+} from "color/mod";
 
 // Vectors transcribed from the inline examples in pfpg's
 // src/js/color-formatter/*.js and src/js/common-utils/format-as-float.js.

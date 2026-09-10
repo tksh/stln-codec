@@ -5,8 +5,8 @@
  * Checkbox defaults from pfpg's data-manipulator page are available as
  * `defaultMethodsForUintN` (swap63 ≤ 5, four16 ≤ 8).
  */
-import type { EncodingMethodName } from "../types.ts";
-import { joinWithAmpersand } from "./compress.ts";
+import type { EncodingMethodName } from "types";
+import { joinWithAmpersand } from "encode/compress";
 import {
   type EncodedGroup,
   encodeGroupsBigint64,
@@ -14,7 +14,7 @@ import {
   encodeGroupsFour16,
   encodeGroupsSwap63,
   type MethodEncodeArgs,
-} from "./methods.ts";
+} from "encode/methods";
 
 /** pfpg's default method selection for a grid size. */
 export function defaultMethodsForUintN(uintN: number): EncodingMethodName[] {

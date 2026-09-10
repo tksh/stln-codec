@@ -1,8 +1,8 @@
 /** bruteforce53 d-value codec. */
-export * from "./alphabets.ts";
-export * from "./shift.ts";
-export * from "./base_x.ts";
-export * from "./freq_diff.ts";
-export * from "./codebook.ts";
-export * from "./diff.ts";
-export * from "./bruteforce53.ts";
+export * from "bruteforce53/alphabets";
+export * from "bruteforce53/shift";
+export * from "bruteforce53/base-x";
+export * from "bruteforce53/freq-diff";
+export * from "bruteforce53/codebook";
+export * from "bruteforce53/diff";
+export * from "bruteforce53/bruteforce53";

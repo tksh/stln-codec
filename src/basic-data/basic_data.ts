@@ -6,9 +6,9 @@
  * URLCompressor-encoded and `~`-prefixed (matching pfpg's `processProperty`).
  */
 import { encode as urlCompressorEncode } from "@tksh/url-compressor";
-import type { BasicData } from "../types.ts";
-import { BASIC_DATA_KEYS, type BasicDataKey } from "../constants.ts";
-import { tryDecompress } from "../flags.ts";
+import type { BasicData } from "types";
+import { BASIC_DATA_KEYS, type BasicDataKey } from "stln-constants";
+import { tryDecompress } from "flags";
 
 /** Unreserved URI characters (RFC 3986 §2.3). */
 const URI_SAFE = /^[0-9a-zA-Z_\-\.~]+$/;

@@ -10,8 +10,8 @@
  * now maps those to `NaN`). The documented vectors in pfpg's `bigint64-dec.js`
  * show the intended substring chunks, which is what this port implements.
  */
-import { base64UrlDec, base64UrlEnc } from "../base-n/base64url.ts";
-import type { DecodedWidthsAndCounts, DvalQuad, LineGroup } from "../types.ts";
+import { base64UrlDec, base64UrlEnc } from "base-n/base64url";
+import type { DecodedWidthsAndCounts, DvalQuad, LineGroup } from "types";
 
 const COORDS = ["x1", "y1", "x2", "y2"] as const;
 type Coord = typeof COORDS[number];

@@ -2,7 +2,7 @@
  * swap63 d-value codec: each relative value in `[-31, 31]` swaps to one of
  * 63 characters (`0-9a-zA-Z_`). For the ≤31 grid (UInt5Portray) only.
  */
-import type { DvalQuad, LineGroup } from "../types.ts";
+import type { DvalQuad, LineGroup } from "types";
 
 const MIN = -31;
 const MAX = 31;

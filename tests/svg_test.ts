@@ -1,6 +1,6 @@
 import { assertStrictEquals } from "@std/assert";
-import { generateSvg } from "../src/svg/mod.ts";
-import type { DecodedGroup, DecodedParams } from "../src/types.ts";
+import { generateSvg } from "svg/mod";
+import type { DecodedGroup, DecodedParams } from "types";
 
 function group(
   partial: Partial<DecodedGroup> & Pick<DecodedGroup, "groupColors">,

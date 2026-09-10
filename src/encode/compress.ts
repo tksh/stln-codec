@@ -6,13 +6,13 @@
  * `[colors]=[1st][payload]`.
  */
 import { encode as urlCompressorEncode } from "@tksh/url-compressor";
-import { compressToEncodedURIComponent } from "../compression.ts";
+import { compressToEncodedURIComponent } from "compression";
 import {
   COMPRESSION_FLAGS,
   type CompressionMethodName,
   ENCODING_METHOD_FLAGS,
-} from "../constants.ts";
-import type { EncodingMethodName } from "../types.ts";
+} from "stln-constants";
+import type { EncodingMethodName } from "types";
 
 export interface CompressArgs {
   /** Raw d-value payloads by group id (no flags, no widths). */

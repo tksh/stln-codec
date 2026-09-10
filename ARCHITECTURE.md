@@ -4,6 +4,45 @@ How `stln-codec` turns artwork data into URL params and back. For the
 Straightlines rules themselves (grouped straight lines, unsigned-int
 coordinates, path modes), see the [spec](https://github.com/tksh/Straightlines).
 
+## Module layout
+
+All internal modules are addressed by bare specifiers from the `imports` map in
+`deno.jsonc` (never relative paths), grouped here as in that map:
+
+```text
+src/
+  mod.ts            public entry (re-exports everything below)
+  types.ts          shared data model (BasicData, LineGroup, DecodedParams, …)
+  stln-constants.ts basic-data keys, compression/encoding flags, SVG constants
+                    (named with a prefix: bare `constants` would collide with
+                    Node's builtin module during type-checking)
+  compression.ts    Compression-Stream helpers (URI-component safe)
+  flags.ts          flagged `tryDecompress` (`~` / `0` / `1` branches)
+  decode.ts         decode facade: `decodeUrlParams`, `decodeUrlToSvg`,
+                    `mergeUrlParams`
+  base-n/           base-N primitives shared by the d-value codecs
+                    (chars, base52, base53, base64url)
+  color/            hex/rgb/opacity helpers for group-color codes
+                    (hex, rgb, opacity)
+  basic-data/       non-lines params: parse, encode, URL-decode, uintN
+  group-colors/     per-group stroke + opacity codes
+  widths-counts/    stroke-width runs with derived line indices
+  bruteforce53/     dictionary + mixed diff payloads
+                    (alphabets, shift, base-x, freq-diff, codebook, diff,
+                    bruteforce53)
+  bigint64/         absolute coordinates as one base-64url bigint
+  swap63/           one character per relative value in [-31, 31]
+  four16/           custom base-16 over four 16-char sets
+  size-data/        canvas size, relative/absolute conversion
+  svg/              SVG documents for both path modes
+  encode/           lines-data pipeline
+                    (parse, compress, methods, best-mix)
+```
+
+Each directory has a `mod.ts` barrel; `src/mod.ts` re-exports them all, and
+tests import areas (or the `stln-codec` self-reference for the public entry) the
+same way.
+
 ## Data model
 
 - **`BasicData`** — non-lines params: `bits` (required, grid-size class), plus

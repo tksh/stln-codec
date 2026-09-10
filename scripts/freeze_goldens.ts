@@ -8,11 +8,11 @@ import {
   bestMixEncode,
   parseAggregatedLinesData,
   parseLinesData,
-} from "../src/encode/mod.ts";
-import { encodeBasicData, parseBasicData } from "../src/basic-data/mod.ts";
-import { encodeGroupColors } from "../src/group-colors/mod.ts";
-import { encodeWidthsAndCounts } from "../src/widths-counts/mod.ts";
-import { decodeUrlToSvg, mergeUrlParams } from "../src/decode.ts";
+} from "encode/mod";
+import { encodeBasicData, parseBasicData } from "basic-data/mod";
+import { encodeGroupColors } from "group-colors/mod";
+import { encodeWidthsAndCounts } from "widths-counts/mod";
+import { decodeUrlToSvg, mergeUrlParams } from "decode";
 
 const FIX = new URL("../tests/fixtures/", import.meta.url);
 const GOLDEN = new URL("../tests/fixtures/golden/", import.meta.url);

@@ -1,13 +1,13 @@
 import { assertStrictEquals } from "@std/assert";
-import { encodeBasicData, parseBasicData } from "../src/basic-data/mod.ts";
-import { decodeUrlToSvg, mergeUrlParams } from "../src/decode.ts";
+import { encodeBasicData, parseBasicData } from "basic-data/mod";
+import { decodeUrlToSvg, mergeUrlParams } from "decode";
 import {
   bestMixEncode,
   parseAggregatedLinesData,
   parseLinesData,
-} from "../src/encode/mod.ts";
-import { encodeGroupColors } from "../src/group-colors/mod.ts";
-import { encodeWidthsAndCounts } from "../src/widths-counts/mod.ts";
+} from "encode/mod";
+import { encodeGroupColors } from "group-colors/mod";
+import { encodeWidthsAndCounts } from "widths-counts/mod";
 
 const FIX = new URL("./fixtures/", import.meta.url);
 const GOLDEN = new URL("./fixtures/golden/", import.meta.url);

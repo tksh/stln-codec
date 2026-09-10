@@ -4,12 +4,7 @@
  * pfpg reads these from textareas (`jsonToMapObj`); the library validates
  * decoded JSON values into typed arrays instead.
  */
-import type {
-  AggregatedLinesData,
-  CoordRows,
-  LineGroup,
-  Rgb,
-} from "../types.ts";
+import type { AggregatedLinesData, CoordRows, LineGroup, Rgb } from "types";
 
 function isNumberArray(value: unknown): value is number[] {
   return Array.isArray(value) && value.every((v) => typeof v === "number");

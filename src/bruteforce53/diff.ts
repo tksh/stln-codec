@@ -2,9 +2,9 @@
  * Per-value diff handlers: bare `[0-9]` digits, codebook hits, base-52 with
  * underscore prefixes for out-of-range magnitudes, and two-letter base-X.
  */
-import { base52Dec, base52Enc } from "../base-n/base52.ts";
-import { baseXDec, baseXEnc } from "./base_x.ts";
-import { getHalfOfBaseXRange } from "./shift.ts";
+import { base52Dec, base52Enc } from "base-n/base52";
+import { baseXDec, baseXEnc } from "bruteforce53/base-x";
+import { getHalfOfBaseXRange } from "bruteforce53/shift";
 
 /** Leave `[0-9]` as bare digits. */
 export function handleSingleDigit(diff: number): number | undefined {

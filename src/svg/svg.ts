@@ -6,14 +6,14 @@
  * absolute `M…L…`, grouped under per-width `<g>` elements). Note
  * `stroke-opacity` applies per group in the former, per line in the latter.
  */
-import { TAB_SPACE } from "../constants.ts";
+import { TAB_SPACE } from "stln-constants";
 import type {
   BasicData,
   DecodedGroup,
   DecodedParams,
   PathMode,
   SizeData,
-} from "../types.ts";
+} from "types";
 
 function isPresent(value: string | undefined): value is string {
   return value !== undefined && value !== "";

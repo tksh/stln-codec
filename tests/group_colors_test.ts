@@ -1,10 +1,7 @@
 import { assertEquals, assertStrictEquals, assertThrows } from "@std/assert";
-import { hexExpandToTen } from "../src/color/mod.ts";
-import {
-  decodeGroupColors,
-  encodeGroupColors,
-} from "../src/group-colors/mod.ts";
-import type { LineGroup } from "../src/types.ts";
+import { hexExpandToTen } from "color/mod";
+import { decodeGroupColors, encodeGroupColors } from "group-colors/mod";
+import type { LineGroup } from "types";
 
 function lineGroup(
   g_id: number,

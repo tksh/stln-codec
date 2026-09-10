@@ -5,11 +5,11 @@
  * encoded: 1–2 chars padded with `a` to length 2, longer payloads prefixed
  * with `(length − 2)` underscores.
  */
-import { base52Dec, base52Enc } from "../base-n/base52.ts";
+import { base52Dec, base52Enc } from "base-n/base52";
 import {
   addToEliminateNegativeBeforeEncode,
   subtractToRestoreOriginalAfterDecode,
-} from "./shift.ts";
+} from "bruteforce53/shift";
 
 /** Encode frequent diff values to the joined dictionary string. */
 export function encodeFreqDiff(

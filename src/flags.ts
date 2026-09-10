@@ -5,8 +5,8 @@
  * (pfpg's sync `tryDecompress` returned a `Promise` object for that branch;
  * see the migration plan §1.)
  */
-import { decompressFromEncodedURIComponent } from "./compression.ts";
-import { COMPRESSION_FLAGS } from "./constants.ts";
+import { decompressFromEncodedURIComponent } from "compression";
+import { COMPRESSION_FLAGS } from "stln-constants";
 import { decode as urlCompressorDecode } from "@tksh/url-compressor";
 
 /** Decompress one flagged URL-param value. */

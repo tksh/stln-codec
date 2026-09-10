@@ -5,8 +5,8 @@
  * Encode takes line groups (not a textarea id); decode takes the 10-digit
  * expanded hex (callers expand via `hexExpandToTen` first).
  */
-import { hexShortenFromTen } from "../color/hex.ts";
-import { addDecimalToZeroAndOne } from "../color/opacity.ts";
+import { hexShortenFromTen } from "color/hex";
+import { addDecimalToZeroAndOne } from "color/opacity";
 import {
   hexToRgbArr,
   hexToUint8,
@@ -14,8 +14,8 @@ import {
   rgbObjToHex,
   rgbStringify,
   uint8ToHex,
-} from "../color/rgb.ts";
-import type { DecodedGroupColors, LineGroup } from "../types.ts";
+} from "color/rgb";
+import type { DecodedGroupColors, LineGroup } from "types";
 
 /** Encode each group's colors to its shortened URL-param key, by group id. */
 export function encodeGroupColors(

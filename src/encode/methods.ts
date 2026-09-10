@@ -5,19 +5,12 @@
  * These are the DOM-free cores of pfpg's `*Enc` button handlers (no
  * textareas, no timing display, no global `resultInfo`).
  */
-import {
-  encodeBigint64Dvals,
-  getDigitsPerChunk,
-} from "../bigint64/bigint64.ts";
-import { encodeBruteforce53Diffs } from "../bruteforce53/bruteforce53.ts";
-import { encodeFour16Dvals } from "../four16/four16.ts";
-import { encodeSwap63Dvals } from "../swap63/swap63.ts";
-import type {
-  AggregatedLinesData,
-  EncodingMethodName,
-  LineGroup,
-} from "../types.ts";
-import { tryCompressDvals } from "./compress.ts";
+import { encodeBigint64Dvals, getDigitsPerChunk } from "bigint64/bigint64";
+import { encodeBruteforce53Diffs } from "bruteforce53/bruteforce53";
+import { encodeFour16Dvals } from "four16/four16";
+import { encodeSwap63Dvals } from "swap63/swap63";
+import type { AggregatedLinesData, EncodingMethodName, LineGroup } from "types";
+import { tryCompressDvals } from "encode/compress";
 
 /** One encoded group: the `key=value` pair plus what produced it. */
 export interface EncodedGroup {

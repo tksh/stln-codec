@@ -1,9 +1,9 @@
 import { assertEquals, assertStrictEquals, assertThrows } from "@std/assert";
-import type { AggModeData, AggregatedLinesData } from "../src/types.ts";
+import type { AggModeData, AggregatedLinesData } from "types";
 import {
   decodeWidthsAndCounts,
   encodeWidthsAndCounts,
-} from "../src/widths-counts/mod.ts";
+} from "widths-counts/mod";
 
 function agg(
   g_id: number,

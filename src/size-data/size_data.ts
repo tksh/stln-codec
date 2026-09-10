@@ -9,8 +9,8 @@ import type {
   DecodedWidthsAndCounts,
   DvalQuad,
   SizeData,
-} from "../types.ts";
-import { VIEWBOX_START_X, VIEWBOX_START_Y } from "../constants.ts";
+} from "types";
+import { VIEWBOX_START_X, VIEWBOX_START_Y } from "stln-constants";
 
 interface Size {
   width: number;

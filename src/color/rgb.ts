@@ -4,8 +4,8 @@
  * All functions throw on invalid input; the pfpg originals returned
  * `"Invalid …"` sentinel strings instead.
  */
-import type { Rgb } from "../types.ts";
-import { hexExpandToSix, tryDeleteHash } from "./hex.ts";
+import type { Rgb } from "types";
+import { hexExpandToSix, tryDeleteHash } from "color/hex";
 
 /** 2-digit hex → 0–1 normalized number rounded to 2 decimals. */
 export function normalizedFromHex(hex: string): number {

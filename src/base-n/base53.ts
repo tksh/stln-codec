@@ -4,7 +4,7 @@
  * Used for the bruteforce53 3rd flag and for stroke-width counts.
  * Invalid input characters throw (same policy as `base52Dec`).
  */
-import { getBase53Characters } from "./chars.ts";
+import { getBase53Characters } from "base-n/chars";
 
 const ALPHABET53 = getBase53Characters();
 

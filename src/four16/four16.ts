@@ -7,10 +7,10 @@
  * diffs back through `diffToRel` at ≤7.
  */
 import { chunk } from "@std/collections/chunk";
-import { diffToRel } from "../bruteforce53/diff.ts";
-import { getFour16CharsSets } from "../base-n/chars.ts";
-import type { Four16CharSets } from "../base-n/chars.ts";
-import type { AggregatedLinesData, DvalQuad, LineGroup } from "../types.ts";
+import { diffToRel } from "bruteforce53/diff";
+import { getFour16CharsSets } from "base-n/chars";
+import type { Four16CharSets } from "base-n/chars";
+import type { AggregatedLinesData, DvalQuad, LineGroup } from "types";
 
 const COORDS = ["x1", "y1", "x2", "y2"] as const;
 type Coord = typeof COORDS[number];

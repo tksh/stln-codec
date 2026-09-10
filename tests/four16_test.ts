@@ -6,13 +6,9 @@ import {
   encodeCoordsWithFourBase16,
   encodeFour16Dvals,
   four16Dec,
-} from "../src/four16/mod.ts";
-import { getFour16CharsSets } from "../src/base-n/mod.ts";
-import type {
-  AggregatedLinesData,
-  CoordRows,
-  LineGroup,
-} from "../src/types.ts";
+} from "four16/mod";
+import { getFour16CharsSets } from "base-n/mod";
+import type { AggregatedLinesData, CoordRows, LineGroup } from "types";
 
 const SETS = getFour16CharsSets();
 

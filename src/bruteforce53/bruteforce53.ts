@@ -9,19 +9,19 @@
  * earlier revision passed `baseXNumber` here, producing payloads the decoder
  * could not reconstruct whenever the list was longer than the cap.)
  */
-import { base53Dec, base53Enc } from "../base-n/base53.ts";
-import type { AggregatedLinesData } from "../types.ts";
+import { base53Dec, base53Enc } from "base-n/base53";
+import type { AggregatedLinesData } from "types";
 import {
   createCodebookToDec,
   createCodebookToEnc,
   getActualCodebookSize,
-} from "./codebook.ts";
+} from "bruteforce53/codebook";
 import {
   calculateLimitsForBaseXSkipRange,
   decodeDiff,
   encodeOneDiff,
-} from "./diff.ts";
-import { decodeFreqDiff, encodeFreqDiff } from "./freq_diff.ts";
+} from "bruteforce53/diff";
+import { decodeFreqDiff, encodeFreqDiff } from "bruteforce53/freq-diff";
 
 const COORDS = ["x1", "y1", "x2", "y2"] as const;
 type Coord = typeof COORDS[number];

@@ -16,7 +16,7 @@ import {
   parseAggregatedLinesData,
   parseBasicData,
   parseLinesData,
-} from "../src/mod.ts";
+} from "stln-codec";
 
 const FIXTURES = new URL("./fixtures/", import.meta.url);
 

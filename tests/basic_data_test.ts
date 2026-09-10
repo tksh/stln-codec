@@ -10,12 +10,12 @@ import {
   getBasicDataFromUrlParams,
   parseBasicData,
   resolveUintN,
-} from "../src/basic-data/mod.ts";
-import { tryDecompress } from "../src/flags.ts";
+} from "basic-data/mod";
+import { tryDecompress } from "flags";
 import {
   compressToEncodedURIComponent,
   decompressFromEncodedURIComponent,
-} from "../src/compression.ts";
+} from "compression";
 
 const SAMPLE_BASIC = {
   bits: "~5",

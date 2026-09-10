@@ -6,8 +6,8 @@ import {
   findNearestMultipleOfFourX,
   getDigitsPerChunk,
   recoverOriginalZeroPadding,
-} from "../src/bigint64/mod.ts";
-import type { DvalQuad, LineGroup } from "../src/types.ts";
+} from "bigint64/mod";
+import type { DvalQuad, LineGroup } from "types";
 
 function group(g_id: number, abs: DvalQuad): LineGroup {
   const rel: DvalQuad = [[], [], [], []];

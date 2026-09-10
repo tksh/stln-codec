@@ -1,5 +1,5 @@
 /** Base-N encodings shared by the d-value codecs. */
-export * from "./chars.ts";
-export * from "./base52.ts";
-export * from "./base53.ts";
-export * from "./base64url.ts";
+export * from "base-n/chars";
+export * from "base-n/base52";
+export * from "base-n/base53";
+export * from "base-n/base64url";

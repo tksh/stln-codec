@@ -15,7 +15,7 @@ import {
   getBase53Characters,
   getBase64UrlCharacters,
   getFour16CharsSets,
-} from "../src/base-n/mod.ts";
+} from "base-n/mod";
 
 // Vectors transcribed from the inline examples in pfpg's
 // src/js/encode-and-decode/enc-and-dec/base-n/*.js.

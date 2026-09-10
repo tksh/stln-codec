@@ -5,28 +5,20 @@
  * `flags.ts`). Group ids are positional (0-based loop index), matching pfpg's
  * `decodeAsThreeData`, which ignores the param key order beyond that.
  */
-import { absToRel, bigint64Dec } from "./bigint64/bigint64.ts";
-import {
-  getBasicDataFromUrlParams,
-  resolveUintN,
-} from "./basic-data/basic_data.ts";
-import { bruteforce53Dec } from "./bruteforce53/bruteforce53.ts";
-import { diffToRel } from "./bruteforce53/diff.ts";
-import { hexExpandToTen } from "./color/hex.ts";
-import { BASIC_DATA_KEYS, encodingMethodOf } from "./constants.ts";
-import { tryDecompress } from "./flags.ts";
-import { four16Dec } from "./four16/four16.ts";
-import { decodeGroupColors } from "./group-colors/group_colors.ts";
-import { relToAbs, sizeDataDec } from "./size-data/size_data.ts";
-import { generateSvg } from "./svg/svg.ts";
-import { swap63Dec } from "./swap63/swap63.ts";
-import type {
-  DecodedGroup,
-  DecodedParams,
-  DvalQuad,
-  PathMode,
-} from "./types.ts";
-import { decodeWidthsAndCounts } from "./widths-counts/widths_counts.ts";
+import { absToRel, bigint64Dec } from "bigint64/bigint64";
+import { getBasicDataFromUrlParams, resolveUintN } from "basic-data/basic-data";
+import { bruteforce53Dec } from "bruteforce53/bruteforce53";
+import { diffToRel } from "bruteforce53/diff";
+import { hexExpandToTen } from "color/hex";
+import { BASIC_DATA_KEYS, encodingMethodOf } from "stln-constants";
+import { tryDecompress } from "flags";
+import { four16Dec } from "four16/four16";
+import { decodeGroupColors } from "group-colors/group-colors";
+import { relToAbs, sizeDataDec } from "size-data/size-data";
+import { generateSvg } from "svg/svg";
+import { swap63Dec } from "swap63/swap63";
+import type { DecodedGroup, DecodedParams, DvalQuad, PathMode } from "types";
+import { decodeWidthsAndCounts } from "widths-counts/widths-counts";
 
 function toQuad(rows: number[][], what: string): DvalQuad {
   if (rows.length !== 4) throw new Error(`${what}: expected four coordinates`);

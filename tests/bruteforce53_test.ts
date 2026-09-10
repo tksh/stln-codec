@@ -3,27 +3,24 @@ import {
   getAlphabets52,
   getAlphabetsForBaseX,
   getAlphabetsForCodebook,
-} from "../src/bruteforce53/alphabets.ts";
-import { baseXDec, baseXEnc } from "../src/bruteforce53/base_x.ts";
+} from "bruteforce53/alphabets";
+import { baseXDec, baseXEnc } from "bruteforce53/base-x";
 import {
   bruteforce53Dec,
   calculateDiffLimits,
   encodeBruteforce53Diffs,
-} from "../src/bruteforce53/bruteforce53.ts";
+} from "bruteforce53/bruteforce53";
 import {
   createCodebookToDec,
   createCodebookToEnc,
   getActualCodebookSize,
-} from "../src/bruteforce53/codebook.ts";
+} from "bruteforce53/codebook";
 import {
   decodeDiff,
   diffToRel,
   handleBase52EncodingWithPrefix,
-} from "../src/bruteforce53/diff.ts";
-import {
-  decodeFreqDiff,
-  encodeFreqDiff,
-} from "../src/bruteforce53/freq_diff.ts";
+} from "bruteforce53/diff";
+import { decodeFreqDiff, encodeFreqDiff } from "bruteforce53/freq-diff";
 import {
   addNumBeforeEncode,
   addToEliminateNegativeBeforeEncode,
@@ -31,8 +28,8 @@ import {
   getHalfOfBaseXRange,
   subtractNumAfterDecode,
   subtractToRestoreOriginalAfterDecode,
-} from "../src/bruteforce53/shift.ts";
-import type { AggregatedLinesData, CoordRows } from "../src/types.ts";
+} from "bruteforce53/shift";
+import type { AggregatedLinesData, CoordRows } from "types";
 
 Deno.test("alphabet slices match the documented examples", () => {
   assertStrictEquals(

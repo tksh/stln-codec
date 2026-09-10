@@ -1,12 +1,8 @@
 import { assertEquals, assertThrows } from "@std/assert";
-import { absToRel } from "../src/bigint64/mod.ts";
-import { decodeWidthsAndCounts } from "../src/widths-counts/mod.ts";
-import {
-  calculateCanvasSize,
-  relToAbs,
-  sizeDataDec,
-} from "../src/size-data/mod.ts";
-import type { DecodedGroup, DvalQuad } from "../src/types.ts";
+import { absToRel } from "bigint64/mod";
+import { decodeWidthsAndCounts } from "widths-counts/mod";
+import { calculateCanvasSize, relToAbs, sizeDataDec } from "size-data/mod";
+import type { DecodedGroup, DvalQuad } from "types";
 
 Deno.test("calculateCanvasSize matches the documented canvases", () => {
   // 127x127 square from two top-to-bottom strokes.

@@ -4,7 +4,7 @@
  * Encode maps each frequent value to one of the *last* codebook letters;
  * decode inverts that mapping.
  */
-import { getAlphabetsForCodebook } from "./alphabets.ts";
+import { getAlphabetsForCodebook } from "bruteforce53/alphabets";
 
 /** Cap the dictionary at `maxCodebookSize` entries. */
 export function getActualCodebookSize(
