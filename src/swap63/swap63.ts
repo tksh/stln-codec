@@ -2,6 +2,7 @@
  * swap63 d-value codec: each relative value in `[-31, 31]` swaps to one of
  * 63 characters (`0-9a-zA-Z_`). For the ≤31 grid (UInt5Portray) only.
  */
+import { zip } from "@std/collections/zip";
 import type { DvalQuad, LineGroup } from "types";
 
 const MIN = -31;
@@ -32,11 +33,7 @@ export function createCodebook<K, V>(
   if (keys.length !== values.length) {
     throw new Error("createCodebook: length mismatch");
   }
-  const codebook = new Map<K, V>();
-  for (let i = 0; i < keys.length; i++) {
-    codebook.set(keys[i] as K, values[i] as V);
-  }
-  return codebook;
+  return new Map(zip(keys, values));
 }
 
 const COORDS = ["x1", "y1", "x2", "y2"] as const;

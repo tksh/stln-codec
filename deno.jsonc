@@ -30,9 +30,10 @@
     // Self-reference so tests exercise the public entry point.
     "stln-codec": "./src/mod.ts",
 
-    // Shared std collections helpers (chunked splits, running reductions).
+    // Shared std collections helpers (chunked splits, running reductions, zips).
     "@std/collections/chunk": "jsr:@std/collections@^1.3.0/chunk",
     "@std/collections/running-reduce": "jsr:@std/collections@^1.3.0/running-reduce",
+    "@std/collections/zip": "jsr:@std/collections@^1.3.0/zip",
 
     // URL-safe string compression for the `0`-flag branch.
     "@tksh/url-compressor": "jsr:@tksh/url-compressor@^1.1.1",
