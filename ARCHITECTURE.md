@@ -22,10 +22,9 @@ src/
                     `mergeUrlParams`
   base-n/           base-N primitives shared by the d-value codecs
                     (chars, base52, base53, base64url)
-  color/            hex/rgb/opacity helpers for group-color codes
-                    (hex, rgb, opacity)
   basic-data/       non-lines params: parse, encode, URL-decode, uintN
-  group-colors/     per-group stroke + opacity codes
+  group-colors/     per-group stroke + opacity codes (uses the external
+                    `@tksh/group-colors-param-codec` for hex/shortening math)
   widths-counts/    stroke-width runs with derived line indices
   bruteforce53/     dictionary + mixed diff payloads
                     (alphabets, shift, base-x, freq-diff, codebook, diff,

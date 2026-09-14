@@ -37,6 +37,9 @@
     // URL-safe string compression for the `0`-flag branch.
     "@tksh/url-compressor": "jsr:@tksh/url-compressor@^1.1.1",
 
+    // Shared group-color parameter codec (shortening/expansion, hex helpers).
+    "@tksh/group-colors-param-codec": "jsr:@tksh/group-colors-param-codec@^0.1.1",
+
     // Top-level modules: shared types, flags, streams, and the decode facade.
     "types": "./src/types.ts",
     "stln-constants": "./src/constants.ts",
@@ -50,12 +53,6 @@
     "base-n/base53": "./src/base-n/base53.ts",
     "base-n/base64url": "./src/base-n/base64url.ts",
     "base-n/mod": "./src/base-n/mod.ts",
-
-    // Color helpers for group-color codes.
-    "color/hex": "./src/color/hex.ts",
-    "color/rgb": "./src/color/rgb.ts",
-    "color/opacity": "./src/color/opacity.ts",
-    "color/mod": "./src/color/mod.ts",
 
     // Basic (non-lines) artwork params.
     "basic-data/basic-data": "./src/basic-data/basic_data.ts",

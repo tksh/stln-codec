@@ -10,7 +10,6 @@ export * from "stln-constants";
 export * from "compression";
 export * from "flags";
 export * from "base-n/mod";
-export * from "color/mod";
 export * from "basic-data/mod";
 export * from "group-colors/mod";
 export * from "widths-counts/mod";

@@ -11,8 +11,9 @@ strings decode back to data objects and SVG documents. It is used in
 
 The library is pure and dependency-light: no DOM, no filesystem, no network. Its
 only runtime dependencies are
-[`@tksh/url-compressor`](https://jsr.io/@tksh/url-compressor) and selected
-[`@std/collections`](https://jsr.io/@std/collections) helpers.
+[`@tksh/url-compressor`](https://jsr.io/@tksh/url-compressor),
+[`@tksh/group-colors-param-codec`](https://jsr.io/@tksh/group-colors-param-codec)
+and selected [`@std/collections`](https://jsr.io/@std/collections) helpers.
 
 ## Features
 
@@ -118,10 +119,17 @@ All entry points are re-exported from `src/mod.ts`:
 | `bruteforce53/`, `bigint64/`, `swap63/`, `four16/` | d-value codecs (payload level)                                                                                              |
 | `group-colors/`, `widths-counts/`                  | group attribute codecs                                                                                                      |
 | `base-n/`                                          | `base52` / `base53` / base-64url primitives + alphabets                                                                     |
-| `color/`                                           | hex/rgb/opacity helpers for group-color codes                                                                               |
+| `@tksh/group-colors-param-codec`                   | shared hex/groups shortening + RGB/opacity helpers (external)                                                               |
 | `constants.ts`                                     | basic-data keys, compression/encoding flags, SVG constants                                                                  |
 | `compression.ts`, `flags.ts`                       | stream helpers, flagged `tryDecompress`                                                                                     |
 | `size-data/`                                       | `calculateCanvasSize`, `sizeDataDec`, `relToAbs`                                                                            |
+
+## Group-color responsibility split
+
+`stln-codec` owns only the `LineGroup` / `DecodedGroupColors` shapes and the
+per-group wiring. The canonical 10-digit group-color value, its shortening to
+the 10/6/5/3/1-character forms, and the hex/RGB/opacity conversions come from
+[`@tksh/group-colors-param-codec`](https://jsr.io/@tksh/group-colors-param-codec).
 
 ## Development
 

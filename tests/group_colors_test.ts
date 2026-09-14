@@ -1,5 +1,5 @@
 import { assertEquals, assertStrictEquals, assertThrows } from "@std/assert";
-import { hexExpandToTen } from "color/mod";
+import { expandGroupColor } from "@tksh/group-colors-param-codec";
 import { decodeGroupColors, encodeGroupColors } from "group-colors/mod";
 import type { LineGroup } from "types";
 
@@ -79,7 +79,7 @@ Deno.test("group colors round-trip through shorten and expand", () => {
   for (const group of groups) {
     const short = encoded.get(group.g_id);
     assertStrictEquals(typeof short, "string");
-    const decoded = decodeGroupColors(hexExpandToTen(short as string));
+    const decoded = decodeGroupColors(expandGroupColor(short as string));
     assertStrictEquals(
       decoded.gStrokeRgbStr,
       `rgb(${group.g_stroke.r} ${group.g_stroke.g} ${group.g_stroke.b})`,

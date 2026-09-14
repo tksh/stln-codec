@@ -5,11 +5,11 @@
  * `flags.ts`). Group ids are positional (0-based loop index), matching pfpg's
  * `decodeAsThreeData`, which ignores the param key order beyond that.
  */
+import { expandGroupColor } from "@tksh/group-colors-param-codec";
 import { absToRel, bigint64Dec } from "bigint64/bigint64";
 import { getBasicDataFromUrlParams, resolveUintN } from "basic-data/basic-data";
 import { bruteforce53Dec } from "bruteforce53/bruteforce53";
 import { diffToRel } from "bruteforce53/diff";
-import { hexExpandToTen } from "color/hex";
 import { BASIC_DATA_KEYS, encodingMethodOf } from "stln-constants";
 import { tryDecompress } from "flags";
 import { four16Dec } from "four16/four16";
@@ -58,7 +58,7 @@ export async function decodeUrlParams(
       throw new Error("decodeUrlParams: unreachable index");
     }
     const [colorKey, rawValue] = entry;
-    const groupColors = decodeGroupColors(hexExpandToTen(colorKey));
+    const groupColors = decodeGroupColors(expandGroupColor(colorKey));
     const payload = await tryDecompress(rawValue);
     const flag = payload[0];
     if (flag === undefined) {

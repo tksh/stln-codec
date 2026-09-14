@@ -5,7 +5,7 @@ import {
   assertThrows,
 } from "@std/assert";
 import { decodeGroupColors } from "group-colors/mod";
-import { hexExpandToTen } from "color/mod";
+import { expandGroupColor } from "@tksh/group-colors-param-codec";
 import type { AggregatedLinesData, CoordRows, LineGroup } from "types";
 import {
   bestMixEncode,
@@ -194,7 +194,7 @@ Deno.test("bestMixEncode picks the shortest pair per group", async () => {
   // Encoded colors/widths decode back to the inputs.
   const [colors, rest] = winner.kvPair.split("=");
   assertEquals(
-    decodeGroupColors(hexExpandToTen(colors as string)).gStrokeRgbStr,
+    decodeGroupColors(expandGroupColor(colors as string)).gStrokeRgbStr,
     "rgb(255 255 255)",
   );
   assert(rest !== undefined && rest.length > 2, winner.kvPair);
