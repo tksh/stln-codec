@@ -1,6 +1,5 @@
 {
   "name": "@tksh/stln-codec",
-  "version": "0.1.2",
   "exports": "./src/mod.ts",
   "tasks": {
     "test": "deno test --allow-read tests/",
