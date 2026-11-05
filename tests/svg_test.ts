@@ -171,3 +171,89 @@ Deno.test("generateSvg omits absent optional tags and indents metadata", () => {
     "metadata must be indented",
   );
 });
+
+Deno.test("generateSvg escapes XML-unsafe characters in title/desc", () => {
+  const nasty: DecodedParams = {
+    basicData: {
+      bits: "5",
+      title: "<script>alert(1)</script>",
+      desc: "a & b \"c\" 'd'",
+      metadata:
+        '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">\n  <dc:title xmlns:dc="http://purl.org/dc/elements/1.1/">t &amp; u</dc:title>\n</rdf:RDF>',
+    },
+    linesData: new Map([[0, group({ groupColors: WHITE })]]),
+    sizeData: { viewbox: "0 0 1 1", width: 1, height: 1 },
+  };
+  const svg = generateSvg(nasty, { pathMode: "relativeMerged" });
+  assertStrictEquals(
+    svg.includes("<title>&lt;script&gt;alert(1)&lt;/script&gt;</title>"),
+    true,
+    "title must be XML-escaped",
+  );
+  assertStrictEquals(
+    svg.includes(
+      "<desc>a &amp; b &quot;c&quot; &apos;d&apos;</desc>",
+    ),
+    true,
+    "desc must be XML-escaped",
+  );
+  assertStrictEquals(
+    svg.includes("<script>"),
+    false,
+    "no raw <script> may survive in the title/desc",
+  );
+  // metadata must pass through as raw RDF (validated at ingress), not be escaped
+  assertStrictEquals(
+    svg.includes(
+      '    <metadata>\n        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">\n          <dc:title xmlns:dc="http://purl.org/dc/elements/1.1/">t &amp; u</dc:title>\n        </rdf:RDF>\n    </metadata>',
+    ),
+    true,
+    "metadata must pass through as raw, indented XML",
+  );
+});
+
+Deno.test("generateSvg replaces XML-1.0-illegal characters with U+FFFD", () => {
+  const nasty: DecodedParams = {
+    basicData: { bits: "5", title: "a\u0000b\u0007c\u000Bd𐀀e" },
+    linesData: new Map([[0, group({ groupColors: WHITE })]]),
+    sizeData: { viewbox: "0 0 1 1", width: 1, height: 1 },
+  };
+  const svg = generateSvg(nasty, { pathMode: "relativeMerged" });
+  assertStrictEquals(
+    svg.includes("<title>a\uFFFDb\uFFFDc\uFFFDd𐀀e</title>"),
+    true,
+    "XML-1.0-illegal characters must be replaced by U+FFFD",
+  );
+});
+
+Deno.test("decode rejects malformed metadata but passes valid XML", async () => {
+  const { decodeUrlParams } = await import("stln-codec");
+  const showcase = (await Deno.readTextFile(
+    new URL("./fixtures/showcase-202401_001.search.txt", import.meta.url),
+  )).trim();
+  // showcase metadata is well-formed RDF and must decode without error
+  const parsed = await decodeUrlParams(showcase);
+  assertStrictEquals(
+    parsed.basicData.metadata?.includes("<rdf:RDF"),
+    true,
+    "showcase metadata must decode to well-formed RDF",
+  );
+  // demo of strict checking: garbage metadata must throw
+  const broken = showcase.replace(
+    /metadata=[^&]+/,
+    "metadata=~<notareal&entity>",
+  );
+  let threw = false;
+  try {
+    await decodeUrlParams(broken);
+  } catch (error) {
+    threw = true;
+    assertStrictEquals(
+      error instanceof Error &&
+        error.message.includes("metadata is not well-formed XML"),
+      true,
+      "error message must name the failure mode",
+    );
+  }
+  assertStrictEquals(threw, true, "malformed metadata must be rejected");
+});

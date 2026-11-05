@@ -5,6 +5,7 @@
  * Values already URI-safe pass through verbatim; anything else is
  * URLCompressor-encoded and `~`-prefixed (matching pfpg's `processProperty`).
  */
+import { parse } from "@std/xml";
 import { encode as urlCompressorEncode } from "@tksh/url-compressor";
 import type { BasicData } from "types";
 import { BASIC_DATA_KEYS, type BasicDataKey } from "stln-constants";
@@ -12,6 +13,28 @@ import { tryDecompress } from "flags";
 
 /** Unreserved URI characters (RFC 3986 §2.3). */
 const URI_SAFE = /^[0-9a-zA-Z_\-\.~]+$/;
+
+/**
+ * Well-formedness check for `<metadata>` content at decode/parse time.
+ *
+ * The SVG `<metadata>` element is an XML fragment container by nature (RDF is
+ * the showcase example), so the codec deliberately treats it as XML rather
+ * than as XML-unsafe text like `<title>`/`<desc>`. An external container
+ * (decode from URL / parse from JSON) is rejected if the payload isn't a
+ * well-formed XML fragment, so `generateSvg` never emits an SVG document
+ * whose metadata breaks the surrounding XML.
+ *
+ * Throws if not well-formed; returns the value otherwise.
+ */
+export function validateMetadataXml(metadata: string): string {
+  try {
+    parse(metadata);
+  } catch (cause) {
+    const message = cause instanceof Error ? cause.message : String(cause);
+    throw new Error(`metadata is not well-formed XML: ${message}`);
+  }
+  return metadata;
+}
 
 /** Parse basic data from decoded JSON (`unknown` in, validated `BasicData` out). */
 export function parseBasicData(json: unknown): BasicData {
@@ -110,6 +133,9 @@ export async function getBasicDataFromUrlParams(
     }
   }
   if (!bitsSeen) throw new Error("getBasicDataFromUrlParams: bits is required");
+  if (result.metadata !== undefined) {
+    result.metadata = validateMetadataXml(result.metadata);
+  }
   return result;
 }
 

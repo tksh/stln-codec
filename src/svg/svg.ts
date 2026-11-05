@@ -15,6 +15,39 @@ import type {
   SizeData,
 } from "types";
 
+const XML_ESCAPABLE: Record<string, string> = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&apos;",
+};
+
+// XML 1.0 only permits #x9, #xA, #xD and the ranges below; characters outside
+// that set invalidate the document. Replace them with U+FFFD so one is always
+// well-formed. Done via code point iteration rather than a regex with raw
+// control characters (which `deno lint` rejects).
+const isXmlChar = (cp: number): boolean =>
+  cp === 0x09 || cp === 0x0A || cp === 0x0D ||
+  (cp >= 0x20 && cp <= 0xD7FF) ||
+  (cp >= 0xE000 && cp <= 0xFFFD) ||
+  (cp >= 0x10000 && cp <= 0x10FFFF);
+
+const LONE_SURROGATES =
+  /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g;
+
+/** Escape text that is interpolated into the SVG as an XML text node. */
+function escapeXmlText(value: string): string {
+  let sanitized = "";
+  for (const ch of value) {
+    const cp = ch.codePointAt(0)!;
+    sanitized += isXmlChar(cp) ? ch : "\uFFFD";
+  }
+  return sanitized
+    .replace(LONE_SURROGATES, "\uFFFD")
+    .replace(/[&<>"']/g, (ch) => XML_ESCAPABLE[ch] ?? ch);
+}
+
 function isPresent(value: string | undefined): value is string {
   return value !== undefined && value !== "";
 }
@@ -116,8 +149,12 @@ function generateTagsBeforeStrokes(
   const open =
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${sizeData.viewbox}" shape-rendering="crispEdges">`;
   const optional: Array<{ tag: string; content: string | undefined }> = [
-    { tag: "title", content: basicData.title },
-    { tag: "desc", content: basicData.desc },
+    { tag: "title", content: escapeXmlText(basicData.title ?? "") },
+    { tag: "desc", content: escapeXmlText(basicData.desc ?? "") },
+    // `<metadata>` is a container for an XML fragment (typically RDF), not
+    // text; escaping it would serialize its markup as gibberish text. It is
+    // validated as well-formed XML at ingress (`validateMetadataXml`), so it
+    // is safe to embed verbatim.
     { tag: "metadata", content: indentMetadata(basicData.metadata) },
   ];
   const tags = optional

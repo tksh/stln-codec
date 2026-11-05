@@ -97,6 +97,8 @@ derives from its absolute coordinates.
      per-width `<g>` elements.
    - Optional `<title>`/`<desc>`/`<metadata>` tags are emitted only when present
      (metadata re-indented for its nested position).
+   - `<title>`/`<desc>` text is XML-escaped at output time. `<metadata>` is
+     validated as well-formed XML at decode time and emitted verbatim.
 
 ## Encode flow
 

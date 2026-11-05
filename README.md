@@ -102,7 +102,10 @@ A `~`-prefixed value claims to be already URI-safe and passes through verbatim
 (the decoder strips exactly one `~`). Encoding a `~`-prefixed value that is
 _not_ URI-safe throws — such input could never decode back. Other unsafe values
 take the compressor path. On decode, a present-but-empty value throws; absent
-optional keys are omitted (`bits` is required). See
+optional keys are omitted (`bits` is required). `<metadata>` is validated at
+decode time as well-formed XML; otherwise the value is rejected. `<title>` and
+`<desc>` are emitted into the SVG as XML text nodes, so characters that are
+otherwise significant in XML are automatically escaped. See
 [ARCHITECTURE.md](./ARCHITECTURE.md) for the full data flow.
 
 ## API reference

@@ -36,6 +36,8 @@
 
     // URL-safe string compression for the `0`-flag branch.
     "@tksh/url-compressor": "jsr:@tksh/url-compressor@^1.1.1",
+    // Well-formedness check for `<metadata>` content at decode time.
+    "@std/xml": "jsr:@std/xml@^0.2.0",
 
     // Shared group-color parameter codec (shortening/expansion, hex helpers).
     "@tksh/group-colors-param-codec": "jsr:@tksh/group-colors-param-codec@^0.1.1",
