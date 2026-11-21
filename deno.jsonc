@@ -40,7 +40,7 @@
     "@std/xml": "jsr:@std/xml@^0.2.0",
 
     // Shared group-color parameter codec (shortening/expansion, hex helpers).
-    "@tksh/group-colors-param-codec": "jsr:@tksh/group-colors-param-codec@^0.1.1",
+    "@tksh/group-colors-param-codec": "jsr:@tksh/group-colors-param-codec@^0.2.0",
 
     // Top-level modules: shared types, flags, streams, and the decode facade.
     "types": "./src/types.ts",
